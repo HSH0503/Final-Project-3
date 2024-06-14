@@ -101,26 +101,26 @@ void drawButtons()
 void Save()
 {
     string fileName;
-    cout << "ÆÄÀÏ¸í ÀÔ·Â: ";
+    cout << "íŒŒì¼ëª… ìž…ë ¥: ";
     cin >> fileName;
     Mat saveImg = img(Rect(0, 0, 500, 500)).clone();
     resize(saveImg, saveImg, Size(500, 500));
     imwrite(fileName, saveImg);
-    cout << fileName + " ÆÄÀÏÀÌ ÀúÀåµÊ" << endl;
+    cout << fileName + " íŒŒì¼ì´ ì €ìž¥ë¨" << endl;
 }
 void Load()
 {
     string fileName;
-    cout << "ÆÄÀÏ¸í ÀÔ·Â: ";
+    cout << "íŒŒì¼ëª… ìž…ë ¥: ";
     cin >> fileName;
     Mat src = imread(fileName);
     if (!src.empty()) {
         src.copyTo(img(Rect(0, 0, 500, 500)));
         imshow("img", img);
-        cout << fileName + " ÆÄÀÏÀ» ºÒ·¯¿È" << endl;
+        cout << fileName + " íŒŒì¼ì„ ë¶ˆëŸ¬ì˜´" << endl;
     }
     else {
-        cout << "ÆÄÀÏÀ» ºÒ·¯¿Ã ¼ö ¾ø½À´Ï´Ù." << endl;
+        cout << "íŒŒì¼ì„ ë¶ˆëŸ¬ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
     }
 }
 void Clear()
@@ -128,7 +128,7 @@ void Clear()
     img(Rect(0, 0, 500, 500)) = Scalar(255, 255, 255);
     drawButtons();
     imshow("img", img);
-    cout << "ÀÔ·ÂÃ¢ »èÁ¦µÊ" << endl;
+    cout << "ìž…ë ¥ì°½ ì‚­ì œë¨" << endl;
 }
 void Run()
 {
@@ -155,28 +155,28 @@ void Run()
 		centers.push_back(center);
 	}
 	if (boundingBoxCount == 3)
-		cout << "ÀÎ½Ä °á°ú: 8" << endl;
+		cout << "ì¸ì‹ ê²°ê³¼: 8" << endl;
 	else if (boundingBoxCount == 2) {
 		Rect firstBox = boundingBoxes[0];
 		Rect secondBox = boundingBoxes[1];
 		int centerY1 = (firstBox.tl().y + firstBox.br().y) / 2;
 		int centerY2 = (secondBox.tl().y + secondBox.br().y) / 2;
 		if (centerY1 > centerY2)
-			cout << "ÀÎ½Ä °á°ú: 6" << endl;
+			cout << "ì¸ì‹ ê²°ê³¼: 6" << endl;
 		else if (centerY1 < centerY2)
-			cout << "ÀÎ½Ä °á°ú: 9" << endl;
+			cout << "ì¸ì‹ ê²°ê³¼: 9" << endl;
 		else if (abs(centerY1 - centerY2) < 30)
-			cout << "ÀÎ½Ä °á°ú: 0" << endl;
+			cout << "ì¸ì‹ ê²°ê³¼: 0" << endl;
 	}
 	else if (boundingBoxCount == 1)
-		cout << "ÀÎ½Ä °á°ú: 1" << endl;
+		cout << "ì¸ì‹ ê²°ê³¼: 1" << endl;
 	else
-		cout << "ÀÎ½ÄµÈ ¼ýÀÚ°¡ ¾ø½À´Ï´Ù." << endl;
+		cout << "ì¸ì‹ëœ ìˆ«ìžê°€ ì—†ìŠµë‹ˆë‹¤." << endl;
 	cout << endl;
 }
 void Exit()
 {
-    cout << "ÇÁ·Î±×·¥ Á¾·á" << endl;
+    cout << "í”„ë¡œê·¸ëž¨ ì¢…ë£Œ" << endl;
     destroyAllWindows();
     exit(0);
 }
@@ -188,7 +188,7 @@ void Contours()
     vector<vector<Point>> contours;
     findContours(binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
     int contourCount = contours.size();
-    cout << "¿Ü°û¼±ÀÇ °³¼ö: " << contourCount << "°³" << endl;
+    cout << "ì™¸ê³½ì„ ì˜ ê°œìˆ˜: " << contourCount << "ê°œ" << endl;
 }
 void Feature2()
 {
@@ -199,7 +199,7 @@ void Feature2()
 	vector<vector<Point>> contours;
 	findContours(binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
 	int contourCount = contours.size();
-	cout << "¿Ü°û¼±ÀÇ °³¼ö: " << contourCount << "°³" << endl;
+	cout << "ì™¸ê³½ì„ ì˜ ê°œìˆ˜: " << contourCount << "ê°œ" << endl;
 	Mat dst = img(Rect(1, 1, 497, 497)).clone();
 	resize(dst, dst, Size(500, 500));
 	cvtColor(dst, gray, COLOR_BGR2GRAY);
@@ -219,30 +219,21 @@ void Feature2()
 		centroid.x /= contours[i].size();
 		centroid.y /= contours[i].size();
 		center.push_back(centroid);
-		cout << "¿Ü°û¼± " << i + 1 << "ÀÇ ¹«°ÔÁß½É: (" << center[i].x << ", " << center[i].y << ")" << endl;
+		cout << "ì™¸ê³½ì„  " << i + 1 << "ì˜ ë¬´ê²Œì¤‘ì‹¬: (" << center[i].x << ", " << center[i].y << ")" << endl;
 		circle(cen, center[i], 5, Scalar(0, 0, 255), -1);
 	}
 }
 void Feature3()
 {
-    Mat binaryImage = img(Rect(1, 1, 498, 498)).clone();
-    resize(binaryImage, binaryImage, Size(500, 500));
-    Mat gray, bin, final1;
-    int minX = INT_MAX, minY = INT_MAX, maxX = 0, maxY = 0;
-    cvtColor(binaryImage, gray, COLOR_BGR2GRAY); 
-    threshold(gray, bin, 0, 255, THRESH_BINARY_INV | THRESH_OTSU); 
+    Mat gray, binary;
+    cvtColor(img(Rect(1, 1, 490, 490)), gray, COLOR_BGR2GRAY);
+    threshold(gray, binary, 100, 255, THRESH_BINARY_INV);
     vector<vector<Point>> contours;
-    findContours(bin, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-    cvtColor(bin, final1, COLOR_GRAY2BGR);
-    for (const auto& contour : contours) { 
-        for (const auto& point : contour) { 
-            minX = min(minX, point.x);
-            minY = min(minY, point.y);
-            maxX = max(maxX, point.x);
-            maxY = max(maxY, point.y);
-        }
-        rectangle(final1, Point(minX, minY), Point(maxX, maxY), Scalar(0, 0, 255), 2);
+    findContours(binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+    for (size_t i = 0; i < contours.size(); i++) {
+        Rect boundRect = boundingRect(contours[i]);
+        rectangle(binary, boundRect.tl(), boundRect.br(), Scalar(255), 2);
     }
-    Mat save = binaryImage(Rect(minX, minY, maxX - minX, maxY - minY)).clone();
-    imshow("Contours", save);
+    imshow("img", img);
+    imshow("img1", binary);
 }
