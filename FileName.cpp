@@ -20,8 +20,8 @@ void Clear();
 void Run();
 void Exit();
 void Contours();
-void Feature2();
-void Feature3();
+void Center();
+void BoundBox();
 void drawButtons();
 int main()
 {
@@ -60,12 +60,12 @@ void onMouse1(int event, int x, int y, int flags, void*)
             else if (contours.contains(clickPoint)) {
                 Contours();
             }
-            else if (feature2.contains(clickPoint)) {
-                Feature2();
+            else if (center.contains(clickPoint)) {
+               Center();
             }
-			else if (feature3.contains(clickPoint)) {
-				Feature3();
-			}
+	    else if (boundbox.contains(clickPoint)) {
+		Feature3();
+	    }
         }
     }
     else if (event == EVENT_LBUTTONUP) {
@@ -93,10 +93,10 @@ void drawButtons()
     putText(img, "Exit", Point(exitt.x + 10, exitt.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
     rectangle(img, contours, Scalar(0, 0, 0), 2);
     putText(img, "contours", Point(contours.x + 10, contours.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
-    rectangle(img, feature2, Scalar(0, 0, 0), 2);
-    putText(img, "feature2", Point(feature2.x + 10, feature2.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
-	rectangle(img, feature3, Scalar(0, 0, 0), 2);
-	putText(img, "feature3", Point(feature3.x + 10, feature3.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
+    rectangle(img, center, Scalar(0, 0, 0), 2);
+    putText(img, "center", Point(center.x + 10, center.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
+    rectangle(img, boundbox, Scalar(0, 0, 0), 2);
+    putText(img, "boundbox", Point(boundbox.x + 10, boundbox.y + 50), FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 0), 2);
 }
 void Save()
 {
@@ -190,7 +190,7 @@ void Contours()
     int contourCount = contours.size();
     cout << "외곽선의 개수: " << contourCount << "개" << endl;
 }
-void Feature2()
+void Center()
 {
 
 	Mat gray, thresh, morph, cen, binary;
@@ -223,7 +223,7 @@ void Feature2()
 		circle(cen, center[i], 5, Scalar(0, 0, 255), -1);
 	}
 }
-void Feature3()
+void BoundBox()
 {
     Mat gray, binary;
     cvtColor(img(Rect(1, 1, 490, 490)), gray, COLOR_BGR2GRAY);
